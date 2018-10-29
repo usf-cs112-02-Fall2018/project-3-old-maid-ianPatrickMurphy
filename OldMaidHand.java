@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class OldMaidHand extends Deck {
+
+    protected ArrayList<ArrayList<Card>> allPlayerHands = new ArrayList<>();
+    Random rand = new Random();
+
+    public OldMaidHand(int playerNum){
+
+        super();
+        dealAllHands(playerNum);
+
+    }
+
+    public void dealAllHands(int playerNum){
+
+        int tempInt;
+        ArrayList<Card> temp;
+
+        for(int i = 0; i < playerNum; i++){
+
+            temp = new ArrayList<Card>();
+            allPlayerHands.add(temp);
+
+        }
+
+        for(int i = 0; i < super.stack.size();){
+
+            for(int j = 0; j < playerNum; j++){
+
+                if(super.stack.size() > 0) {
+
+                    tempInt = rand.nextInt(super.stack.size());
+
+                    allPlayerHands.get(j).add(super.stack.get(tempInt));
+                    super.stack.remove(tempInt);
+                    super.size--;
+
+                }
+            }
+        }
+
+        /*
+        System.out.println(allPlayerHands);
+        for(int i = 0; i < allPlayerHands.size(); i++){
+
+            System.out.println(allPlayerHands.get(i).size());
+
+        }
+        */
+    }
+
+}

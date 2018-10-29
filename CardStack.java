@@ -8,8 +8,8 @@ import java.util.*;
 
 public class CardStack
 {
-    private ArrayList<Card> stack;
-    private int size;
+    protected ArrayList<Card> stack;
+    protected int size;
 
     //-----------------------------------------------------------------
     //  Creates a full deck with the cards initially "in order".
