@@ -1,8 +1,8 @@
 public class OldMaidPlayer extends Player{
 
-    public OldMaidPlayer(){
+    public OldMaidPlayer(String name){
 
-        super("default");
+        super(name);
 
     }
 

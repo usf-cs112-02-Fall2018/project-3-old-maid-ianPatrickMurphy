@@ -8,7 +8,41 @@ public class OldMaidHand extends Deck {
     public OldMaidHand(int playerNum){
 
         super();
+        removeFirstCard();
+        shuffleDeck();
         dealAllHands(playerNum);
+
+    }
+
+    public Card getCardFromList(int playerNum, int cardInt){
+
+        return allPlayerHands.get(playerNum).get(cardInt);
+
+    }
+
+    public ArrayList<Card> getArrayList(int input){
+
+        return allPlayerHands.get(input);
+
+    }
+
+    public void shuffleDeck(){
+
+        ArrayList<Card> temp = new ArrayList<Card>();
+
+        for(int i = 0; i < super.stack.size(); i++){
+
+            temp.add(super.stack.get(rand.nextInt(super.stack.size())));
+
+        }
+
+        super.stack = temp;
+
+    }
+
+    public void removeFirstCard(){
+
+        super.stack.remove(rand.nextInt(super.stack.size()));
 
     }
 
