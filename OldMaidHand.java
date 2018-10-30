@@ -14,6 +14,12 @@ public class OldMaidHand extends Deck {
 
     }
 
+    public Card removeCardFromList(int playerNum, int cardInt){
+
+        return allPlayerHands.remove(playerNum).remove(cardInt);
+
+    }
+
     public Card getCardFromList(int playerNum, int cardInt){
 
         return allPlayerHands.get(playerNum).get(cardInt);
@@ -23,6 +29,12 @@ public class OldMaidHand extends Deck {
     public ArrayList<Card> getArrayList(int input){
 
         return allPlayerHands.get(input);
+
+    }
+
+    public void setArrayList(int input, ArrayList<Card> inputArray){
+
+        allPlayerHands.set(input, inputArray);
 
     }
 
