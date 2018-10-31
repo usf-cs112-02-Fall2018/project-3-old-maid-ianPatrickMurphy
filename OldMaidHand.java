@@ -14,15 +14,39 @@ public class OldMaidHand extends Deck {
 
     }
 
-    public Card removeCardFromList(int playerNum, int cardInt){
+    public void removePlayerHand(int playerNum){
 
-        return allPlayerHands.remove(playerNum).remove(cardInt);
+        allPlayerHands.remove(playerNum);
+
+    }
+
+    public void removeCardFromList(int playerNum, int cardInt){
+
+        allPlayerHands.get(playerNum).remove(cardInt);
+
+    }
+
+    public void removeCardFromList(int playerNum, Card cardEle){
+
+        allPlayerHands.get(playerNum).remove(cardEle);
 
     }
 
     public Card getCardFromList(int playerNum, int cardInt){
 
         return allPlayerHands.get(playerNum).get(cardInt);
+
+    }
+
+    public void addCardToList(int playerNum, int cardInt, Card cardEle){
+
+        allPlayerHands.get(playerNum).add(cardInt, cardEle);
+
+    }
+
+    public void addCardToList(int playerNum, Card cardEle){
+
+        allPlayerHands.get(playerNum).add(cardEle);
 
     }
 
@@ -38,13 +62,34 @@ public class OldMaidHand extends Deck {
 
     }
 
+    public void shuffleHand(int playerNum){
+
+        ArrayList<Card> temp = new ArrayList<Card>();
+        int tempInt = 0;
+        int initialArraySize = allPlayerHands.get(playerNum).size();
+
+        for(int i = 0; i < initialArraySize; i++){
+
+            tempInt = rand.nextInt(allPlayerHands.get(playerNum).size());
+            temp.add(allPlayerHands.get(playerNum).get(tempInt));
+            allPlayerHands.get(playerNum).remove(allPlayerHands.get(playerNum).get(tempInt));
+
+        }
+
+        allPlayerHands.set(playerNum, temp);
+
+    }
+
     public void shuffleDeck(){
 
         ArrayList<Card> temp = new ArrayList<Card>();
+        int tempInt = 0;
 
-        for(int i = 0; i < super.stack.size(); i++){
+        for(int i = 0; i < 51; i++){
 
-            temp.add(super.stack.get(rand.nextInt(super.stack.size())));
+            tempInt = rand.nextInt(super.stack.size());
+            temp.add(super.stack.get(tempInt));
+            super.stack.remove(super.stack.get(tempInt));
 
         }
 
