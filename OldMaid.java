@@ -114,29 +114,47 @@ public class OldMaid {
                     numOfPlayers = players.size();
                     iAvoider = false;
 
-                    if(i < numOfPlayers-1) {
+                    try {
 
-                        taker = players.get(i);
-                        giver = players.get(i+1);
 
+                        if (i < numOfPlayers - 1) {
+
+                            taker = players.get(i);
+                            giver = players.get(i + 1);
+
+                        } else {
+
+                            taker = players.get(i);
+                            giver = players.get(0);
+
+                        }
                     }
-                    else{
+                    catch(IndexOutOfBoundsException e){
 
-                        taker = players.get(i);
+                        taker = players.get(i-1);
                         giver = players.get(0);
 
                     }
 
-                    System.out.println("!! PLEASE ENTER ALL NUMBERS AS INTEGERS !!");
-                    System.out.println("!! AS USING LETTERS WILL CRASH THE GAME !!");
-                    System.out.println(players.get(players.indexOf(taker)).getName()
-                            + ", please enter which card you with to take"
-                            + " from " + players.get(players.indexOf(giver)).getName() + "'s Hand. ");
-                    System.out.println("Choose between numbers 0 through "
-                            + handler.getArrayList(players.indexOf(giver)).size()
-                            + ", excluding " + handler.getArrayList(players.indexOf(giver)).size() + ":");
+                    if(handler.getArrayList(players.indexOf(giver)).size() != 0) {
 
-                    tempInt = Integer.parseInt(scan.nextLine());
+                        System.out.println("!! PLEASE ENTER ALL NUMBERS AS INTEGERS !!");
+                        System.out.println("!! AS USING LETTERS WILL CRASH THE GAME !!");
+                        System.out.println(players.get(players.indexOf(taker)).getName()
+                                + ", please enter which card you with to take"
+                                + " from " + players.get(players.indexOf(giver)).getName() + "'s Hand. ");
+                        System.out.println("Choose between numbers 0 through "
+                                + handler.getArrayList(players.indexOf(giver)).size()
+                                + ", excluding " + handler.getArrayList(players.indexOf(giver)).size() + ":");
+
+                        tempInt = Integer.parseInt(scan.nextLine());
+                    }
+
+                    else{
+
+                        tempInt = 0;
+
+                    }
 
                     try {
 
@@ -166,44 +184,50 @@ public class OldMaid {
                             + players.get(players.indexOf(taker)).getName() + "'s Hand...");
                     staticMethodAvoider.removingPairs(i, handler, taker);
 
+                    for(int j = 0; j < numOfPlayers-1; j++) {
+
+                        try
+                        {
+                            if (handler.getArrayList(j+1).size() == 0) {
+
+                                winnerPlayers.add(players.get(j+1));
+                                players.remove(j+1);
+                                handler.removePlayerHand(j+1);
+                                iAvoider = true;
+
+                            }
+                        }
+
+                        catch(IndexOutOfBoundsException e){
+
+                        }
+
+                        try {
+                            if (handler.getArrayList(j).size() == 0) {
+
+                                winnerPlayers.add(players.get(j));
+                                players.remove(j);
+                                handler.removePlayerHand(j);
+                                iAvoider = true;
+                                break;
+
+                            }
+                        }
+
+                        catch(IndexOutOfBoundsException e){
+
+                        }
+                    }
+
+                    if(players.size() == 1){
+
+                        break;
+
+                    }
+
                     if(!iAvoider){
 
                         i++;
-
-                    }
-                }
-
-                for(int j = 0; j < numOfPlayers-1; j++) {
-
-                    try
-                    {
-                        if (handler.getArrayList(j+1).size() == 0) {
-
-                            winnerPlayers.add(players.get(j+1));
-                            players.remove(j+1);
-                            handler.removePlayerHand(j+1);
-                            iAvoider = true;
-
-                        }
-                    }
-
-                    catch(IndexOutOfBoundsException e){
-
-                    }
-
-                    try {
-                        if (handler.getArrayList(j).size() == 0) {
-
-                            winnerPlayers.add(players.get(j));
-                            players.remove(j);
-                            handler.removePlayerHand(j);
-                            iAvoider = true;
-                            break;
-
-                        }
-                    }
-
-                    catch(IndexOutOfBoundsException e){
 
                     }
                 }
@@ -247,14 +271,17 @@ public class OldMaid {
 
     public void endGameResults(ArrayList<OldMaidPlayer> players, ArrayList<OldMaidPlayer> winnerPlayers){
 
-        winnerPlayers.get(winnerPlayers.size()-1).won();
-        winnerPlayers.get(winnerPlayers.size()-1).setPoints(2);
-
-        System.out.println("Winner: " + winnerPlayers.get(winnerPlayers.size()-1).getName());
-        System.out.println("Winner's Score: " + winnerPlayers.get(winnerPlayers.size()-1).getPoints());
+        System.out.println("Game Over");
         System.out.println("\n");
 
-        for(int i = 0; i < winnerPlayers.size()-1; i++){
+        winnerPlayers.get(0).won();
+        winnerPlayers.get(0).setPoints(2);
+
+        System.out.println("Winner: " + winnerPlayers.get(0).getName());
+        System.out.println("Winner's Score: " + winnerPlayers.get(0).getPoints());
+        System.out.println("\n");
+
+        for(int i = 1; i < winnerPlayers.size(); i++){
 
             winnerPlayers.get(i).setPoints(1);
             System.out.println("Non-Loser: " + winnerPlayers.get(i).getName());

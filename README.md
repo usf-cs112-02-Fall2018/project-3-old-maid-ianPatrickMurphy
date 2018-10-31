@@ -13,12 +13,3 @@ Notes:
 	the choice of what card they pick? Why not just randomize the 
 	card they pick? That would make the game a lot smoother and 
 	require a lot less unnecessary input from the user(s).
-	
-	I would also like the grader to be aware that, due to the 
-	difficulty of the assignment, I had to make compromises in 
-	order to meet the deadline. These mostly manifested in the 
-	use of try-excepts, which are sprinkled throughout the program 
-	to avoid errors that I could never resolve. As a result, the 
-	program will sometimes ask the user to input "a number 0 through 0, 
-	excluding 0". This is a glitch, and 0 is a perfectly acceptable 
-	answer. Usually this occurs when there is only one player left.
